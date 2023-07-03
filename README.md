@@ -56,7 +56,10 @@ def create_continuation(model, vendor=None, vendor_config=None, **kwargs):
         vendor = pick_vendor(model, vendor_config)
     if vendor_config is not None and vendor in vendor_config:
         kwargs = {**vendor_config[vendor]['config'], **kwargs}
-    return openai.Completion.create(model=model, **kwargs)
+    if model.startswith("openai"):
+        return openai.Completion.create(model=model, **kwargs)
+    else:
+        raise NotImplementedError()
 
 def pick_vendor(model, custom_config=None):
     if custom_config is not None:
