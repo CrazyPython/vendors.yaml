@@ -31,7 +31,7 @@ openai:
 
 ### Specification (real)
 
-Each vendor has a `provides` key, which is an array of regular expressions. The file is executed from top to bottom. The first vendor that matches is used. To use a vendor, send its `config` key to the model API.
+Each vendor has a `provides` key, which is an array of regular expressions. The file is executed from top to bottom. The first vendor that matches is used. To use a vendor, send its `config` key to the model API. The request is executed based on the prefix the vendor name has. For example, if `openai-foo` provides a model, the `openai` request executor is used.
 
 #### Standardized key names
 
