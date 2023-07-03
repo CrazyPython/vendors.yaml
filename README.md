@@ -1,6 +1,10 @@
 # vendors.yml
 A file format for configuring access to language models
 
+## Motivation
+
+Some language model applications need to easily switch between different models. Different accounts have access to different models, and managing keys and organization IDs across vendors can be difficult. `vendors.yml` is a standardized way to tell language model apps how to access differnt models.
+
 ## Specification
 
 ### Example
