@@ -28,3 +28,42 @@ openai:
         organization: org-myOtherOrgId
     provides: [".*:ft-foo-foundation.*"]
 ```
+
+### Specification (real)
+
+Each vendor has a `provides` key, which is an array of regular expressions. The file is executed from top to bottom. The first vendor that matches is used. To use a vendor, send its `config` key to the model API.
+
+#### Standardized key names
+
+* `api_key` - `apiKey` will not work
+
+#### Standard vendor names
+
+* openai
+* ai21
+* forefront
+* anthropic
+* textsynth
+* goose
+
+### Implementations
+
+#### Toy Python implementation
+
+```
+def create_continuation(model, vendor=None, vendor_config=None, **kwargs):
+    if vendor is None:
+        vendor = pick_vendor(model, vendor_config)
+    if vendor_config is not None and vendor in vendor_config:
+        kwargs = {**vendor_config[vendor]['config'], **kwargs}
+    return openai.Completion.create(model=model, **kwargs)
+
+def pick_vendor(model, custom_config=None):
+    if custom_config is not None:
+        for vendor_name, vendor in custom_config.items():
+            if vendor['provides'] is not None:
+                for pattern in vendor['provides']:
+                    if re.match(pattern, model):
+                        return vendor_name
+    return "openai"
+```
