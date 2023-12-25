@@ -14,17 +14,17 @@ Imagine you have access to the GPT-3.5 base through the [openai-cd2-proxy](https
 ```
 openai-cd2-proxy:
     config:
-        api_key: mySecretProxyKey
+        openai_api_key: mySecretProxyKey
         api_base: https://my.proxy.url/v1
     provides: ["code-davinci-002"]
 openai-gpt-4:
     config:
-        api_key: mySecretKey
+        openai_api_key: mySecretKey
         organization: org-myOrgId
     provides: ["gpt-4.*"]
 openai:
     config:
-        api_key: mySecretKey
+        openai_api_key: mySecretKey
         organization: org-myOtherOrgId
     provides: [".*:ft-foo-foundation.*"]
 ```
