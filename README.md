@@ -1,4 +1,4 @@
-# vendors.yml
+# vendors.yaml
 A file format for configuring access to language models
 
 ## Motivation
